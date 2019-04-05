@@ -1,0 +1,31 @@
+version: "3"
+
+volumes:
+  cache:
+    external: true
+
+services:
+  lb:
+    image: duyuyang/nginx:v1
+    volumes:
+      - cache:/app/cache
+    ports:
+      - "80:80"
+    links:
+      - web
+    networks:
+      - front-tier
+    environment:
+      NGINX_BACKEND_HOST: web
+      NGINX_BACKEND_PORT: 80
+      NGINX_MAX_SIZE: 200m # Enable cache
+    depends_on:
+      - web
+  web:
+    image: duyuyang/unicorn:v1
+    networks: 
+      - front-tier
+
+networks:
+  front-tier:
+    driver: bridge
