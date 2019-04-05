@@ -17,15 +17,15 @@ services:
       - front-tier
     environment:
       NGINX_BACKEND_HOST: web
-      NGINX_BACKEND_PORT: 8080
+      NGINX_BACKEND_PORT: 80
       NGINX_MAX_SIZE: 200m # Enable cache
     depends_on:
       - web
   web:
-    image: duyuyang/unicorn:v1
+    image: duyuyang/unicorn:v2
     ports:
-      - 8080
-    networks: 
+      - 80
+    networks:
       - front-tier
 
 networks:
