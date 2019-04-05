@@ -22,7 +22,7 @@ services:
     depends_on:
       - web
   web:
-    image: duyuyang/unicorn:v2
+    image: duyuyang/unicorn:latest
     ports:
       - 80
     networks:
